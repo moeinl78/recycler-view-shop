@@ -16,7 +16,6 @@
         android:src="@drawable/img_s22"
         android:contentDescription="Empty"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/detailLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         />

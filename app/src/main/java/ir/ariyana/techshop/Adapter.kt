@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.ariyana.techshop.databinding.ItemCardBinding
 
-class Adapter(private val data : ArrayList<Item>,) : RecyclerView.Adapter<Adapter.ViewHolder>(){
+class Adapter(private val data : ArrayList<Item>) : RecyclerView.Adapter<Adapter.ViewHolder>(){
 
     inner class ViewHolder(private val binding : ItemCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(position : Int) {
