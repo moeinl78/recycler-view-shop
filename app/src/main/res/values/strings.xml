@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TechShop</string>
+    <string name="release_date">Exp. release 2022, February</string>
+    <string name="weight">228g/229g , 8.9 thickness</string>
+    <string name="software">Android 12, One UI 4.1</string>
+    <string name="spec">128GB/256GB/1TB etc...</string>
+    <string name="more">More Detail</string>
 </resources>
