@@ -33,4 +33,9 @@ class Adapter(private val data : ArrayList<Item>) : RecyclerView.Adapter<Adapter
     override fun getItemCount(): Int {
         return data.size
     }
+
+    fun addItem(item : Item) {
+        data.add(data.size - 1, item)
+        notifyItemInserted(data.size - 1)
+    }
 }

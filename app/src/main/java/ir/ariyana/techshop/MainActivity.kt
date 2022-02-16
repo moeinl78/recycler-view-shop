@@ -2,9 +2,11 @@ package ir.ariyana.techshop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.ariyana.techshop.databinding.ActivityMainBinding
+import ir.ariyana.techshop.databinding.AddItemBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,5 +27,33 @@ class MainActivity : AppCompatActivity() {
         val adapter = Adapter(itemList.clone() as ArrayList<Item>)
         binding.mainRecyclerView.adapter = adapter
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
+
+        binding.addItem.setOnClickListener {
+            val dialog = AlertDialog.Builder(this).create()
+            val view = AddItemBinding.inflate(layoutInflater)
+            dialog.setView(view.root)
+            dialog.setCancelable(true)
+            dialog.show()
+
+            view.confirmAddItem.setOnClickListener {
+                val itemName = view.itemNameInput.text.toString()
+                val itemWeight = view.itemWeightInput.text.toString()
+                val itemOs = view.itemOsInput.text.toString()
+                val itemRelease = view.itemReleaseInput.text.toString()
+                val randomImages = arrayListOf<String>(
+                    "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-12-pro.jpg",
+                    "https://fdn2.gsmarena.com/vv/bigpic/xiaomi-black-shark-4s.jpg",
+                    "https://fdn2.gsmarena.com/vv/bigpic/samsung-galaxy-s22-plus-5g.jpg",
+                    "https://fdn2.gsmarena.com/vv/bigpic/sony-xperia-pro-i.jpg",
+                    "https://fdn2.gsmarena.com/vv/bigpic/sony-xperia-1-II-o.jpg",
+                    "https://fdn2.gsmarena.com/vv/bigpic/asus-rog-phone-5s-pro.jpg",
+                )
+                val randomNum = (0..5).random()
+                val item = Item(itemName, itemWeight, itemOs, itemRelease, randomImages[randomNum])
+                adapter.addItem(item)
+                binding.mainRecyclerView.scrollToPosition(adapter.itemCount - 1)
+                dialog.dismiss()
+            }
+        }
     }
 }
