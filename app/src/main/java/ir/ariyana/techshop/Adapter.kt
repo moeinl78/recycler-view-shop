@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import ir.ariyana.techshop.databinding.ItemCardBinding
 
-class Adapter(private val data : ArrayList<Item>) : RecyclerView.Adapter<Adapter.ViewHolder>(){
+class Adapter(private val data : ArrayList<Item>, private val itemEvents : ItemEvents) : RecyclerView.Adapter<Adapter.ViewHolder>(){
 
     inner class ViewHolder(private val binding : ItemCardBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(position : Int) {
@@ -18,6 +18,15 @@ class Adapter(private val data : ArrayList<Item>) : RecyclerView.Adapter<Adapter
                 .with(binding.root.context)
                 .load(data[position].itemImage)
                 .into(binding.itemImageView)
+
+            itemView.setOnClickListener {
+                itemEvents.onItemClicked(data[adapterPosition], adapterPosition)
+            }
+
+            itemView.setOnLongClickListener {
+                itemEvents.onLongItemClicked(data[adapterPosition], adapterPosition)
+                true
+            }
         }
     }
 
@@ -37,5 +46,19 @@ class Adapter(private val data : ArrayList<Item>) : RecyclerView.Adapter<Adapter
     fun addItem(item : Item) {
         data.add(data.size - 1, item)
         notifyItemInserted(data.size - 1)
+    }
+
+    fun updateItem(item : Item, itemPosition : Int) {
+
+    }
+
+    fun removeItem(item : Item, itemPosition : Int) {
+        data.remove(item)
+        notifyItemRemoved(itemPosition)
+    }
+
+    interface ItemEvents {
+        fun onItemClicked(item : Item, itemPosition : Int)
+        fun onLongItemClicked(item : Item, itemPosition : Int)
     }
 }

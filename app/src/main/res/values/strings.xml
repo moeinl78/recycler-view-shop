@@ -12,4 +12,7 @@
     <string name="item_os_input">Device Software</string>
     <string name="item_release_input">Device Release</string>
     <string name="item_add_confirm">Confirm</string>
+    <string name="item_remove_title">You sure, you want to remove this item?</string>
+    <string name="item_remove_cancel">NO</string>
+    <string name="item_remove_accept">YES</string>
 </resources>

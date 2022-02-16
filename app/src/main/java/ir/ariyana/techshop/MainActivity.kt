@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.ariyana.techshop.databinding.ActivityMainBinding
 import ir.ariyana.techshop.databinding.AddItemBinding
+import ir.ariyana.techshop.databinding.RemoveItemBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), Adapter.ItemEvents {
 
-    lateinit var binding : ActivityMainBinding
+    private lateinit var binding : ActivityMainBinding
+    private lateinit var adapter : Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,10 +26,11 @@ class MainActivity : AppCompatActivity() {
             Item("Huawei P50 Pro", "195g, 8.5mm thickness", "HarmonyOS 2.0, EMUI 12", "Released 2021, August 12", "https://fdn2.gsmarena.com/vv/bigpic/huawei-p50-pro.jpg"),
         )
 
-        val adapter = Adapter(itemList.clone() as ArrayList<Item>)
+        adapter = Adapter(itemList.clone() as ArrayList<Item>, this)
         binding.mainRecyclerView.adapter = adapter
         binding.mainRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
+        // add item to the recycler view
         binding.addItem.setOnClickListener {
             val dialog = AlertDialog.Builder(this).create()
             val view = AddItemBinding.inflate(layoutInflater)
@@ -54,6 +57,27 @@ class MainActivity : AppCompatActivity() {
                 binding.mainRecyclerView.scrollToPosition(adapter.itemCount - 1)
                 dialog.dismiss()
             }
+        }
+    }
+
+    override fun onItemClicked(item: Item, itemPosition: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override fun onLongItemClicked(item: Item, itemPosition: Int) {
+        val dialog = AlertDialog.Builder(this).create()
+        val view = RemoveItemBinding.inflate(layoutInflater)
+        dialog.setView(view.root)
+        dialog.setCancelable(true)
+        dialog.show()
+
+        view.removeItemAccept.setOnClickListener {
+            adapter.removeItem(item, itemPosition)
+            dialog.dismiss()
+        }
+
+        view.removeItemCancel.setOnClickListener {
+            dialog.dismiss()
         }
     }
 }
