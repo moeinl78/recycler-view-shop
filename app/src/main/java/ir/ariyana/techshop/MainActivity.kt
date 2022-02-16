@@ -2,12 +2,14 @@ package ir.ariyana.techshop
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import ir.ariyana.techshop.databinding.ActivityMainBinding
 import ir.ariyana.techshop.databinding.AddItemBinding
 import ir.ariyana.techshop.databinding.RemoveItemBinding
+import ir.ariyana.techshop.databinding.UpdateItemBinding
 
 class MainActivity : AppCompatActivity(), Adapter.ItemEvents {
 
@@ -61,7 +63,32 @@ class MainActivity : AppCompatActivity(), Adapter.ItemEvents {
     }
 
     override fun onItemClicked(item: Item, itemPosition: Int) {
-        TODO("Not yet implemented")
+        val dialog = AlertDialog.Builder(this).create()
+        val view = UpdateItemBinding.inflate(layoutInflater)
+        dialog.setView(view.root)
+        dialog.setCancelable(true)
+        dialog.show()
+
+        view.updateNameInput.setText(item.itemName)
+        view.updateWeightInput.setText(item.itemWeigh)
+        view.updateOsInput.setText(item.itemSoftware)
+        view.updateReleaseInput.setText(item.itemReleaseDate)
+
+        if(view.updateNameInput.length() > 0 && view.updateWeightInput.length() > 0 && view.updateOsInput.length() > 0 && view.updateReleaseInput.length() > 0) {
+            view.confirmUpdateItem.setOnClickListener {
+                val itemName = view.updateNameInput.text.toString()
+                val itemWeight = view.updateWeightInput.text.toString()
+                val itemOs = view.updateOsInput.text.toString()
+                val itemRelease = view.updateReleaseInput.text.toString()
+
+                val updatedItem = Item(itemName, itemWeight, itemOs, itemRelease, item.itemImage)
+                adapter.updateItem(updatedItem, itemPosition)
+                dialog.dismiss()
+            }
+        }
+        else {
+            Toast.makeText(this, "invalid data!", Toast.LENGTH_SHORT).show()
+        }
     }
 
     override fun onLongItemClicked(item: Item, itemPosition: Int) {

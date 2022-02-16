@@ -49,7 +49,8 @@ class Adapter(private val data : ArrayList<Item>, private val itemEvents : ItemE
     }
 
     fun updateItem(item : Item, itemPosition : Int) {
-
+        data[itemPosition] = item
+        notifyItemChanged(itemPosition)
     }
 
     fun removeItem(item : Item, itemPosition : Int) {
