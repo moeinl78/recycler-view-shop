@@ -6,13 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="256dp"
     android:padding="8dp"
-    android:layout_margin="12dp"
     >
 
     <ImageView
         android:id="@+id/itemImageView"
         android:layout_width="164dp"
-        android:layout_height="match_parent"
+        android:layout_height="164dp"
         android:src="@drawable/img_s22"
         android:contentDescription="Empty"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,14 +24,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/name"
-        android:textSize="17sp"
+        android:textSize="16sp"
         android:textColor="?attr/colorOnSecondary"
         android:fontFamily="@font/product_sans_bold"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@+id/itemImageView"
         app:layout_constraintBottom_toTopOf="@+id/itemWeight"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         />
 
     <TextView
@@ -95,8 +94,8 @@
         android:clickable="true"
         android:focusable="true"
         android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toEndOf="@+id/itemDetailButton"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/itemReleaseDate"
         app:layout_constraintBottom_toBottomOf="parent"
         />
